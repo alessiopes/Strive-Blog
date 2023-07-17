@@ -5,6 +5,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 
+const cors = require('cors');
+
 
 //* Connect our database
 mongoose.connect(process.env.DATABASE_URL);
@@ -19,9 +21,14 @@ db.once('open', () => console.log('Connected to Database'));
 //* Let our database accept JSON files
 app.use(express.json());
 
-const databaseRouter = require('./routes/database');
-app.use('/database', databaseRouter);
+app.use(cors());
+
+const authorsRoutes = require('./routes/authorsRoutes');
+app.use('/authors', authorsRoutes);
+
+const postsRoutes = require("./routes/postsRoutes");
+app.use("/blogPosts", postsRoutes);
 
 
 
-app.listen(port = 5050, () => console.log(`Server Started at port ${port}`));
+app.listen(port = 3000, () => console.log(`Server Started at port ${port}`));

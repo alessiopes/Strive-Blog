@@ -1,0 +1,43 @@
+GET http://localhost:3000/blogPosts
+
+###
+
+GET http://localhost:3000/blogPosts/64b58da91154745f4ab7a294
+
+###
+
+POST http://localhost:3000/blogPosts
+Content-Type: application/json
+
+{
+  "category": "Tech",
+  "title": "Titolo Post",
+  "cover": "https://example.com/test.jpg",
+  "readTime": {
+    "value": 5,
+    "unit": "minuti"
+  },
+  "author": {
+    "name": "Mario Rossi",
+    "avatar": "https://example.com/mario.jpg"
+  },
+  "content": "<p>Contenuto del post</p>"
+}
+
+###
+
+PUT http://localhost:3000/blogPosts/64b58da91154745f4ab7a294
+Content-Type: application/json
+
+{
+  "title": "Titolo modificato",
+  "content": "<p>Contenuto modificato</p>"
+}
+
+###
+
+DELETE http://localhost:3000/blogPosts/64b5932f5d5bd4311f3ea972
+
+###
+
+GET http://localhost:3000/blogPosts?title=alessio

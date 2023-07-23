@@ -23,19 +23,15 @@ const blogPostSchema = new mongoose.Schema({
       required: true,
     },
   },
-  author: {
-    name: {
-      type: String,
-      required: true,
-    },
-    avatar: {
-      type: String,
-      required: true,
-    },
-  },
+  author: { type: mongoose.Schema.Types.ObjectId, ref: "Authors" },
   content: {
     type: String,
     required: true,
+  },
+    comments: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'Comment',
+    default: [],
   },
 });
 

@@ -1,0 +1,35 @@
+// Test delle API per le risorse
+
+// Richiesta GET per tutte le risorse con dato isActive true
+GET http://localhost:3000/resources/active
+
+###
+
+// Richiesta GET per tutte le risorse con dato age maggiore di 26
+GET http://localhost:3000/resources/above-age
+
+###
+
+// Trova tutte le risorse con il dato age maggiore di 26 e minore o uguale a 30
+GET http://localhost:3000/resources/age-range
+
+###
+
+// Trova tutte le risorse con il dato eyes che sia brown o blue
+GET http://localhost:3000/resources/eye-colors
+
+###
+
+// Trova tutte le risorse che non presentano il dato eyes uguale a green
+GET http://localhost:3000/resources/non-green-eyes
+
+###
+
+// Trova tutte le risorse che non presentano il dato eyes uguale a green e neanche blue
+GET http://localhost:3000/resources/non-green-non-blue-eyes
+
+###
+
+// Trova tutte le risorse con il dato company uguale a "FITCORE" e ritorna solo l'email
+GET http://localhost:3000/resources/fitcore-emails
+

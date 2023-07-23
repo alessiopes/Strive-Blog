@@ -1,0 +1,32 @@
+// GET /blogPosts/:id/comments - Ritorna tutti i commenti di uno specifico post
+GET http://localhost:3000/blogPosts/64bd07a2c0ea38210389ee35/comments
+
+###
+
+// GET /blogPosts/:id/comments/:commentId - Ritorna un commento specifico di un post
+GET http://localhost:3000/blogPosts/64bd07a2c0ea38210389ee35/comments/64bd280b9a9bc9500c07e560
+
+###
+
+// POST /blogPosts/:id - Aggiunge un nuovo commento ad un post specifico
+POST http://localhost:3000/blogPosts/64bd07a2c0ea38210389ee35
+Content-Type: application/json
+
+{
+  "content": "Daje col commento coatto"
+}
+
+###
+
+// PUT /blogPosts/:id/comment/:commentId - Modifica un commento di un post specifico
+PUT http://localhost:3000/blogPosts/64bd07a2c0ea38210389ee35/comment/64bd2b41f2c46c6f83ec6038
+Content-Type: application/json
+
+{
+  "content": "Questo è il commento modificato"
+}
+
+###
+
+// DELETE /blogPosts/:id/comment/:commentId - Elimina un commento specifico da un post specifico
+DELETE http://localhost:3000/blogPosts/your-post-id/comment/your-comment-id

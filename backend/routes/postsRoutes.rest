@@ -2,7 +2,7 @@ GET http://localhost:3000/blogPosts
 
 ###
 
-GET http://localhost:3000/blogPosts/64b58da91154745f4ab7a294
+GET http://localhost:3000/blogPosts/64bd07a2c0ea38210389ee35
 
 ###
 
@@ -10,17 +10,14 @@ POST http://localhost:3000/blogPosts
 Content-Type: application/json
 
 {
-  "category": "Tech",
-  "title": "Titolo Post",
+  "category": "Beauty",
+  "title": "Titolo Post 2",
   "cover": "https://example.com/test.jpg",
   "readTime": {
     "value": 5,
     "unit": "minuti"
   },
-  "author": {
-    "name": "Mario Rossi",
-    "avatar": "https://example.com/mario.jpg"
-  },
+  "author": "64bcffa1573536557cdc68cf",
   "content": "<p>Contenuto del post</p>"
 }
 
@@ -36,7 +33,12 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/blogPosts/64b5932f5d5bd4311f3ea972
+DELETE http://localhost:3000/blogPosts/64bd00ac605d5ecbb5f7061c
+
+###
+
+// DELETE /blogPosts => Elimina tutti i post
+DELETE http://localhost:3000/blogPosts
 
 ###
 

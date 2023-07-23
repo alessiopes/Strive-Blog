@@ -1,36 +1,47 @@
 const express = require("express");
 const router = express.Router();
-const BlogPost = require('../modules/posts');
+const BlogPost = require('../models/posts');
+const Author = require('../models/authors');
 
-//* GET /blogPosts => ritorna una lista di blog post
+//* GET /blogPosts => ritorna una lista di blog post con dettagli completi dell'autore
 router.get("/", async (req, res) => {
   try {
-    const blogPosts = await BlogPost.find();
+    const blogPosts = await BlogPost.find().populate('author');
     res.json(blogPosts);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-//* GET /blogPosts/123 => ritorna un singolo post
-router.get("/:id", getBlogPost, (req, res) => {
-  res.json(res.blogPost);
+//* GET /blogPosts/:id => ritorna un singolo post con i dettagli completi dell'autore
+router.get("/:id", getBlogPost, async (req, res) => {
+  try {
+    const populatedBlogPost = await res.blogPost.populate('author');
+    res.json(populatedBlogPost);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 //* POST /blogPosts => crea un nuovo post
 router.post("/", async (req, res) => {
-  const blogPost = new BlogPost({
-    category: req.body.category,
-    title: req.body.title,
-    cover: req.body.cover,
-    readTime: req.body.readTime,
-    author: req.body.author,
-    content: req.body.content,
-  });
+  const { category, title, cover, readTime, author, content } = req.body;
 
   try {
+    const blogPost = new BlogPost({
+      category,
+      title,
+      cover,
+      readTime,
+      author,
+      content,
+    });
+
     const newBlogPost = await blogPost.save();
-    res.status(201).json(newBlogPost);
+
+    const populatedBlogPost = await BlogPost.findById(newBlogPost._id).populate('author');
+
+    res.status(201).json(populatedBlogPost);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -60,6 +71,9 @@ router.put("/:id", getBlogPost, async (req, res) => {
 
     res.blogPost.updatedAt = Date.now();
 
+    // Utilizza .populate() per ottenere i dettagli completi dell'autore
+    await res.blogPost.populate('author').execPopulate();
+
     const updatedBlogPost = await res.blogPost.save();
     res.json(updatedBlogPost);
   } catch (error) {
@@ -74,6 +88,16 @@ router.delete("/:id", getBlogPost, async (req, res) => {
     res.json({ message: "Blog post deleted!" });
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+});
+
+// DELETE /blogPosts => Elimina tutti i post
+router.delete("/", async (req, res) => {
+  try {
+    await BlogPost.deleteMany({});
+    res.status(200).json({ message: 'Tutti i post sono stati eliminati correttamente' });
+  } catch (error) {
+    res.status(500).json({ message: 'Errore nella rimozione dei post' });
   }
 });
 

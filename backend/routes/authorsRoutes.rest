@@ -10,16 +10,16 @@ POST http://localhost:3000/authors
 Content-Type: application/json
 
 {
-    "firstName": "Alessio",	
+    "firstName": "Giada",	
     "lastName": "Pes",
-    "email": "alessio.pes@hotmail.com",
-    "birthDate": "1997-12-22",
+    "email": "giada.pes@hotmail.com",
+    "birthDate": "2001-02-21",
     "avatar": "https://www.example.com"
 }
 
 ###
 
-DELETE http://localhost:3000/authors/64ad8414db86c0906460dc55
+DELETE http://localhost:3000/authors/64b592bb5d5bd4311f3ea96b
 
 ###
 

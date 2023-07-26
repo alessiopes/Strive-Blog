@@ -3,6 +3,8 @@ const router = express.Router();
 
 const Author = require('../models/authors');
 
+const upload = require('../uploadConfig');
+
 //* GET ALL /authors => ritorna tutti gli autori
 router.get("/", async (req, res) => {
     try {

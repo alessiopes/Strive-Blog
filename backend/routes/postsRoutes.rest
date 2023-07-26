@@ -43,3 +43,11 @@ DELETE http://localhost:3000/blogPosts
 ###
 
 GET http://localhost:3000/blogPosts?title=alessio
+
+
+###
+
+PATCH http://localhost:3000/blogPosts/64bd07a2c0ea38210389ee35/cover
+Content-Type: multipart/form-data
+
+cover = filename.jpg

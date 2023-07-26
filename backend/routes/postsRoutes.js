@@ -3,6 +3,8 @@ const router = express.Router();
 const BlogPost = require('../models/posts');
 const Author = require('../models/authors');
 
+const upload = require('../uploadConfig');
+
 //* GET /blogPosts => ritorna una lista di blog post con dettagli completi dell'autore
 router.get("/", async (req, res) => {
   try {
@@ -119,6 +121,26 @@ router.get('/blogPost', async (req, res) => {
     res.json(blogPost);
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+});
+
+router.patch('/:id/cover', upload.single('cover'), async (req, res) => {
+  try {
+    const blogPost = await BlogPost.findById(req.params.id);
+
+    if (!blogPost) {
+      return res.status(404).json({ message: "Blog post not found" });
+    }
+
+    const imageUrl = req.file.path;
+
+    blogPost.coverUrl = imageUrl;
+    await blogPost.save();
+
+    res.json({ message: 'Post cover uploaded successfully!', imageUrl });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error loading post cover' });
   }
 });
 
